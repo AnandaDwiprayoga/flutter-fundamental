@@ -1,4 +1,8 @@
-# routing
+# 01-Routing
+- Menggunakan normal routing `Navigator.pop/push`
+- Named Routing `Navigator.pushNamed`
+- Return data from previous screen 
+- Replace Screen `Navigator.pushReplacementNamed`
 
 A new Flutter project.
 
