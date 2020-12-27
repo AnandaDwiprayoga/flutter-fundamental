@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routing/article.dart';
+import 'package:routing/widgets/custom_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleDetailPage extends StatelessWidget {
@@ -70,10 +71,7 @@ class ArticleWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('News App'),
-      ),
+    return CustomScaffold(
       body: WebView(
         initialUrl: url,
         //to enable javascript code in webview
