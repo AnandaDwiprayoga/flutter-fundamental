@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import 'package:routing/animation_page.dart';
+import 'package:routing/animation_rotate.dart';
+import 'package:routing/my_menu.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,15 +17,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
-      },
+     initialRoute: '/',
+     routes: {
+       MyMenu.routeName : (context) => MyMenu(),
+       AnimationPage.routeName : (context) => AnimationPage(),
+       AnimationRotate.routeName : (context) => AnimationRotate(),
+     },
     );
   }
 }
