@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gesture Detector',
+      title: 'Calculator',
       theme: ThemeData(
-        primarySwatch: Colors.blue
+        primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
       home: MyHomePage(),
     );
   }
