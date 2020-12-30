@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:routing/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,21 +9,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo Route',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
+    return CupertinoApp(
+      theme: CupertinoThemeData(
+        primaryColor: CupertinoColors.systemOrange
       ),
-      //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
-      },
+      home: HomePage(),
     );
   }
 }
