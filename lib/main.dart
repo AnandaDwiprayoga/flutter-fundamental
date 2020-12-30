@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import 'package:routing/learningpath_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,16 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
-      },
+     home: LearningPathPage(),
     );
   }
 }
