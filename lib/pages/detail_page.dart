@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routing/article.dart';
+import 'package:routing/model/article.dart';
 import 'package:routing/widgets/custom_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

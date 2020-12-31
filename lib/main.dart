@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:routing/pages/detail_page.dart';
-import 'package:routing/pages/newlist_page.dart';
-import 'package:routing/style.dart';
+import 'package:routing/common/style.dart';
+import 'package:routing/pages/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,12 +29,16 @@ class MyApp extends StatelessWidget {
           )
         ),
         scaffoldBackgroundColor: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: secondaryColor,
+          unselectedItemColor: Colors.grey,
+        )
       ),
       //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: NewsListPage.routeName,
+      initialRoute: HomePage.routeName,
       routes: {
-        NewsListPage.routeName: (context) => NewsListPage(),
+        HomePage.routeName: (context) => HomePage(),
         ArticleDetailPage.routeName: (context) => ArticleDetailPage(article: ModalRoute.of(context).settings.arguments),
         ArticleWebView.routeName : (context) => ArticleWebView(url: ModalRoute.of(context).settings.arguments)
       },

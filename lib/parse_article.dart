@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:routing/article.dart';
+import 'package:routing/model/article.dart';
 
 List<Article> parseArticles(String json){
     if(json == null){
