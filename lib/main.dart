@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import 'package:provider/provider.dart';
+import 'package:routing/module_page.dart';
+import 'package:routing/provider/done_module_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,21 +11,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo Route',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
+    // to wrap all widget with provider state
+    return ChangeNotifierProvider(
+      create: (context) => DoneModuleProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity),
+        home: ModulePage(),
       ),
-      //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
-      },
     );
   }
 }
