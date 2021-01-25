@@ -4,56 +4,62 @@ import 'package:routing/widgets/custom_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleDetailPage extends StatelessWidget {
-   static const routeName = '/article_detail';
+  static const routeName = '/article_detail';
 
-   final Article article;
+  final Article article;
 
-   const ArticleDetailPage({@required this.article});
+  const ArticleDetailPage({@required this.article});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(article.title),
+        title: Text("News App"),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Hero(
-              tag: article.urlToImage,
-              child: Image.network(article.urlToImage)
-            ),
+            article.urlToImage == null
+                ? Container(
+                    height: 200,
+                    child: Icon(
+                      Icons.error,
+                    ),
+                  )
+                : Hero(
+                    tag: article.urlToImage,
+                    child: Image.network(article.urlToImage)),
             Padding(
               padding: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(article.description),
+                  Text(
+                    article.description ?? "",
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                   Divider(color: Colors.grey),
                   Text(
-                    article.title,
+                    article.title ?? "",
                     style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24
-                    ),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
                   ),
-                  Divider(color:Colors.grey),
+                  Divider(color: Colors.grey),
                   Text('Date: ${article.publishedAt}'),
                   SizedBox(height: 10),
                   Text('Author: ${article.author}'),
                   Divider(color: Colors.grey),
-                  Text(
-                    article.content,
-                    style: TextStyle(fontSize: 16)
-                  ),
+                  Text(article.content ?? "", style: TextStyle(fontSize: 16)),
                   SizedBox(height: 10),
                   RaisedButton(
-                    onPressed: (){
-                      Navigator.pushNamed(context, ArticleWebView.routeName, arguments: article.url);
+                    onPressed: () {
+                      Navigator.pushNamed(context, ArticleWebView.routeName,
+                          arguments: article.url);
                     },
                     child: Text('Read more'),
-                    )
+                  )
                 ],
               ),
             )
@@ -63,7 +69,6 @@ class ArticleDetailPage extends StatelessWidget {
     );
   }
 }
-
 
 class ArticleWebView extends StatelessWidget {
   static const routeName = '/article_web';

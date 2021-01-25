@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CustomScaffold extends StatelessWidget {
-  
   final Widget body;
 
   CustomScaffold({this.body});
@@ -10,19 +9,15 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            body,
-            _buildShortAppWidget()
-          ],
-        )
-      ),
+          child: Stack(
+        children: [body, BuildShortAppWidget()],
+      )),
     );
   }
 }
 
-class _buildShortAppWidget extends StatelessWidget {
-  const _buildShortAppWidget({
+class BuildShortAppWidget extends StatelessWidget {
+  const BuildShortAppWidget({
     Key key,
   }) : super(key: key);
 
@@ -31,22 +26,21 @@ class _buildShortAppWidget extends StatelessWidget {
     return Card(
       margin: EdgeInsets.all(0),
       shape: BeveledRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(16)
-        )
-      ),
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(16))),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.arrow_back), 
-            onPressed: (){
-              Navigator.pop(context);
-            }
-          ),
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: Text('N', style: Theme.of(context).textTheme.headline6,),
+            child: Text(
+              'N',
+              style: Theme.of(context).textTheme.headline6,
+            ),
           )
         ],
       ),
