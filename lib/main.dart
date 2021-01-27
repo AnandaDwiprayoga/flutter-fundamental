@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:routing/ui/detail_page.dart';
+import 'package:routing/ui/home_page.dart';
+import 'package:routing/utils/notification_helper.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+  _notificationHelper.requestIOSPermissions(flutterLocalNotificationsPlugin);
+
   runApp(MyApp());
 }
 
@@ -11,18 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo Route',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
+      initialRoute: HomePage.routeName,
       routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
+        HomePage.routeName: (context) => HomePage(),
+        DetailPage.routeName: (context) => DetailPage()
       },
     );
   }
