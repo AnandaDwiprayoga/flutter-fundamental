@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routing/data/api/api_service.dart';
 import 'package:routing/pages/article_list_page.dart';
+import 'package:routing/pages/detail_page.dart';
 import 'package:routing/pages/settings_page.dart';
 import 'package:routing/provider/news_provider.dart';
+import 'package:routing/provider/scheduling_provider.dart';
+import 'package:routing/utils/background_service.dart';
+import 'package:routing/utils/notification_helper.dart';
 import 'package:routing/widgets/platform_widget.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -25,7 +31,10 @@ class _HomePageState extends State<HomePage> {
       create: (_) => NewsProvider(apiService: ApiService()),
       child: ArticleListPage(),
     ),
-    SettingsPage(),
+    ChangeNotifierProvider<SchedulingProvider>(
+      create: (_) => SchedulingProvider(),
+      child: SettingsPage(),
+    )
   ];
 
   List<BottomNavigationBarItem> _bottomNavBarItems = [
@@ -41,6 +50,20 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _bottomNavIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    port.listen((_) async => await widget._service.someTask());
+    widget._notificationHelper
+        .configureSelectNotificationSubject(ArticleDetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectNotificationSubject.close();
   }
 
   Widget _buildAndroid(BuildContext context) {

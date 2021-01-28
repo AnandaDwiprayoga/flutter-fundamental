@@ -68,13 +68,13 @@ class Article {
 
   Map<String, dynamic> toMap() => {
         "source": source.toMap(),
-        "author": author,
+        "author": author == null ? null : author,
         "title": title,
-        "description": description,
+        "description": description == null ? null : description,
         "url": url,
-        "urlToImage": urlToImage,
+        "urlToImage": urlToImage == null ? null : urlToImage,
         "publishedAt": publishedAt.toIso8601String(),
-        "content": content,
+        "content": content == null ? null : content,
       };
 }
 

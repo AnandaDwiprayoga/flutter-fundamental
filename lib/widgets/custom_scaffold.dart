@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routing/common/navigation.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
@@ -33,7 +34,7 @@ class BuildShortAppWidget extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context);
+                Navigation.back();
               }),
           Padding(
             padding: const EdgeInsets.only(right: 16),

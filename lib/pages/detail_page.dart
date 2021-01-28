@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routing/common/navigation.dart';
 import 'package:routing/model/article.dart';
 import 'package:routing/widgets/custom_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -55,8 +56,8 @@ class ArticleDetailPage extends StatelessWidget {
                   SizedBox(height: 10),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ArticleWebView.routeName,
-                          arguments: article.url);
+                      Navigation.intentWithData(
+                          ArticleWebView.routeName, article.url);
                     },
                     child: Text('Read more'),
                   )

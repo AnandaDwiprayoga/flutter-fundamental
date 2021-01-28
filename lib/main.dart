@@ -1,9 +1,30 @@
+import 'dart:io';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:routing/common/navigation.dart';
 import 'package:routing/pages/detail_page.dart';
 import 'package:routing/common/style.dart';
 import 'package:routing/pages/home_page.dart';
+import 'package:routing/utils/background_service.dart';
+import 'package:routing/utils/notification_helper.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+
+  _service.initializeIsolate();
+
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
   runApp(MyApp());
 }
 
@@ -13,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo Route',
+      navigatorKey: navigatorKey,
       theme: ThemeData(
           primaryColor: primaryColor,
           accentColor: secondaryColor,
