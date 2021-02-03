@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:routing/FirstScreen.dart';
+import './features/number_trivia/depedency_injection_container.dart' as di;
+import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
 
-void main() {
+void main() async {
+  // because this main is asycn so need to add ensureInitialized
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await di.init();
   runApp(MyApp());
 }
 
@@ -11,19 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo Route',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      //jika menggunakan initialRoute tidak bisa menggunakan parameter home
-      initialRoute: '/',
-      routes: {
-        '/': (context) => FirstScreen(),
-        '/secondScreen' : (context) => SecondScreen(),
-        '/secondScreenWithData' : (context) => SecondScreenWithData(),
-        '/returnDataScreen' : (context) => ReturnDataScreen(),
-        '/replacementScreen' : (context) => ReplacementScreen(),
-        '/anotherScreen' : (context) => AnotherScreen()
-      },
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: NumberTriviapage(),
     );
   }
 }
